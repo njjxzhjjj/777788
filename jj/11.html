@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#first{
+				font-weight: bold;
+			}
+			td{
+				text-align: center;
+			}
+		</style>
+		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				
+				$(".del").live("click",function(){
+					$(this).parent().remove();
+				});
+				
+				$(".sub").live("click",function(){
+					var $test=$(this).next().val();
+					if($test>1){
+						$(this).next().val(parseFloat($(this).next().val())-1 );
+					}
+				});
+				
+				$(".nadd").live("click",function(){
+					$(this).prev().val(parseFloat($(this).prev().val())+1 );
+				});
+				
+				$("#checkAll").click(function(){
+					var val=document.getElementById("checkAll").checked;
+					var ch=document.getElementsByName("check");
+					for(var i=0;i<ch.length;i++){
+						ch[i].checked=val;
+					}		
+				});
+				
+				$("#add").click(function(){
+					var s=$('<tr class="row"><td><input type="checkbox" name="check" /></td><td> 苹果手机iPhone5</td><td>¥<span>3999</span>元</td><td><input type="button"  class="sub" value="-" /><input type="text" value="1" /><input type="button" class="add" value="+" /></td><td class="delete"><p>删除</p></td></tr>');
+					$("#tab").append(s); 
+				});
+				
+				$("#delBatch").click(function(){
+					var ch=document.getElementsByName("check");
+					for(var i=0;i<ch.length;i++){
+						if(ch[i].checked){ 
+							$(ch[i]).parent().parent().remove();
+						}
+					}
+				})
+ 
+			})
+		</script>
+	</head>
+	<body>
+		<form action="" method="post">
+				<table border="1px gray solid"  cellspacing="0px" id="tab"> 
+					<tr class="row" id="first">
+						<td ><input type="checkbox" id="checkAll"/>全选 </td>
+						<td>商品信息</td>
+						<td>宜美惠价</td>
+						<td>数量</td>
+						<td>操作</td>
+					</tr>
+					<tr class="row">
+						<td><input type="checkbox" name="check"/></td>
+						<td> <a href="#">天堂雨伞</a></td>
+						<td>¥<span>32.9</span>元</td>
+						<td>
+							<input type="button"  class="sub" value="-" />
+							<input type="text" value="1" />
+							<input type="button" class="nadd" value="+" />
+						</td>
+						<td class="del"><a href="#">删除</a></td>
+					</tr>
+					<tr class="row">
+						<td><input type="checkbox" name="check" /></td>
+						<td><a href="#">苹果手机iphone5</a></td>
+						<td>¥<span>3999</span>元</td>
+						<td>
+							<input type="button"  class="sub" value="-" />
+							<input type="text" value="1" />
+							<input type="button" class="add" value="+" />
+						</td>
+						<td class="del"><a href="#">删除</a></td>
+					</tr>
+				</table><br />
+				<span id="add"><a href="#">增加</a></span>
+				<span id="delBatch"><a href="#">删除</a></span>
+		</form>
+ 
+	</body>
+</html>
